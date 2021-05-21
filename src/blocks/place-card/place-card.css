@@ -1,0 +1,15 @@
+@import url(./__image/place-card__image.css);
+@import url(./__delete-icon/place-card__delete-icon.css);
+@import url(./__description/place-card__description.css);
+@import url(./__name/place-card__name.css);
+@import url(./__like-icon/place-card__like-icon.css);
+@import url(./__likesAmount/place-card__likesAmount.css);
+@import url(./__descriptionBox/place-card__descriptionBox.css);
+
+
+.place-card {
+  width: 282px;
+  background-color: #fff;
+  border-radius: 10px;
+  min-height: 360px;
+}
