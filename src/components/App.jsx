@@ -8,38 +8,34 @@ const container = document.querySelector('.root');
 
 function App() {
 
+
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
-  console.log(isEditProfilePopupOpen)
-
-
-
+  
   function handleAddPlaceClick(){
+    setIsAddPlacePopupOpen(true)
 
-    
-    
-    const newform = container.querySelector('#newPlace');
-    newform.classList.add('popup_is-opened')
-    
   }
 
   
   function handleEditProfileClick(){
 
-    setIsEditProfilePopupOpen(!isEditProfilePopupOpen)
-    console.log(isEditProfilePopupOpen)
-    // const form = container.querySelector('#formEdit');
-
-    // form.classList.add('popup_is-opened')
+    setIsEditProfilePopupOpen(true)
+  
+    
   }
   
-
+  function closeAllPopups(){
+    setIsAddPlacePopupOpen(false)
+    setIsEditProfilePopupOpen(false)
+  }
 
 
   return (
     <>
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddPlace ={handleAddPlaceClick} isEditProfilePopupOpen/>
+      <Main onEditProfile={handleEditProfileClick} onAddPlace ={handleAddPlaceClick} isEditProfilePopupOpen ={isEditProfilePopupOpen} isAddPlacePopupOpen={isAddPlacePopupOpen} onClose={closeAllPopups}/>
       
     </>
   );

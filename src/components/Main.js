@@ -7,7 +7,7 @@ import ImagePopup from './ImagePopup';
 
 
 function Main (props) {
-  console.log(props)
+  
   return (
     <>
       <div className="profile root__section">
@@ -25,7 +25,7 @@ function Main (props) {
       <div className="places-list root__section">
       </div>
 
-      <PopupWithForm name='popup popup-type-edit' title='Редактировать профиль' id="formEdit" >
+      <PopupWithForm name='popup popup-type-edit' title='Редактировать профиль' id="formEdit" onClose={props.onClose} isOpen = {props.isEditProfilePopupOpen}>
         <form className="popup__form" noValidate name="edit">
           <input type="text" id="edit-name" name="name" className="popup__input popup__input_type_name" required minLength="2" maxLength="30" value="Jacques Cousteau"/>
           <span id="error-edit-name" className="error-message"></span>
@@ -34,7 +34,7 @@ function Main (props) {
           <button id="edit-button" className="button popup__button button-active"  name='save'>Сохранить</button>
         </form>
       </PopupWithForm>
-      <PopupWithForm  name='popup' title='Новое место' id="newPlace">
+      <PopupWithForm  name='popup' title='Новое место' id="newPlace" isOpen = {props.isAddPlacePopupOpen} onClose={props.onClose}>
         <form className="popup__form" noValidate name="new">
           <input type="text" id="popup-name" name="name" className="popup__input popup__input_type_name" required minLength="2" maxLength="30" placeholder="Название" value=""/>
           <span id="error-popup-name" className="error-message"></span>
