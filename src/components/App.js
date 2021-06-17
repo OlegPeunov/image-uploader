@@ -3,8 +3,7 @@ import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import PopupWithForm from './PopupWithForm';
-
-
+import ImagePopup from './ImagePopup';
 
 
 function App() {
@@ -12,6 +11,13 @@ function App() {
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+
+  const [selectedCard, setSelectedCard] = React.useState(false);
+
+  function handleCardClick(link){
+    setSelectedCard(link)
+
+  }
 
   
   function handleAddPlaceClick(){
@@ -30,13 +36,14 @@ function App() {
   function closeAllPopups(){
     setIsAddPlacePopupOpen(false)
     setIsEditProfilePopupOpen(false)
+    setSelectedCard(false)
   }
 
 
   return (
     <>
       <Header />
-      <Main onEditProfile={handleEditProfileClick} onAddPlace ={handleAddPlaceClick}/>
+      <Main onEditProfile={handleEditProfileClick} onAddPlace ={handleAddPlaceClick} onCard={handleCardClick}/>
 
       <PopupWithForm name='popup popup-type-edit' title='Редактировать профиль' id="formEdit" isOpen = {isEditProfilePopupOpen} onClose={closeAllPopups}>
         <form className="popup__form" noValidate name="edit">
@@ -56,6 +63,9 @@ function App() {
           <button id="popup-button" className="button popup__button" disabled>+</button>
         </form>
       </PopupWithForm>
+
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
     </>
   );
 }

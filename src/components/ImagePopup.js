@@ -1,11 +1,16 @@
 import React from 'react';
+import closePath from '../images/close.svg'
 
-function ImagePopup() {
+
+function ImagePopup(props) {
+
+  const className = `${`image-wrap`} ${props.card? 'image-wrap_is-opened':''}`
+
   return (
-    <div className="image-wrap">
+    <div className={className} >
       <div className ='image__content'>
-        <img className='popupImage' alt=""/>
-        <img src="./images/close.svg" alt="" className="popupImage__close"/>
+        <img className='popupImage' alt="" src={props.card}/>
+        <img src={closePath} alt="" className="popupImage__close" onClick={props.onClose}/>
       </div>
     </div>
   );

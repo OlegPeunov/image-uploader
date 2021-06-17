@@ -1,5 +1,4 @@
 import React from 'react';
-import ImagePopup from './ImagePopup';
 import newApi from '../utils/api';
 import Card from "./Card";
 
@@ -62,16 +61,13 @@ function Main (props) {
       </div>
 
       <div className="places-list root__section">
-        {cards.map(({likes, _id, link, name, owner})=>{
+        {cards.map(({likes, _id, link, name})=>{
           return(
-            <Card likes={likes} _id={_id} link={link} name={name}/>           
+            <Card onCardClick={props.onCard} likes={likes} _id={_id} link={link} name={name} key={_id}/>           
           ) 
         })}
       </div>
-
       
-
-      <ImagePopup />
     </>
   );
 }
