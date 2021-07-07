@@ -31,6 +31,21 @@ class Api{
     })
       .then(this._getResponseData)
   }
+
+  deleteCard=(card)=>{
+    console.log(card)
+    return fetch(`${this.url}/cards/${card.id}`,{
+      method: 'DELETE',
+      headers: {
+        authorization: this.authorization,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(this._getResponseData)  
+  }
+
+
+
 }
 
 
