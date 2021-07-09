@@ -4,6 +4,7 @@ import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import PopupWithForm from './PopupWithForm';
+import EditProfilePopup from './EditProfilePopup'
 import ImagePopup from './ImagePopup';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -24,7 +25,7 @@ function App() {
       })
       .catch((err)=>{
         console.log(err)
-      })  
+      })
 
   }, []); 
   
@@ -46,7 +47,7 @@ function App() {
   function handleEditProfileClick(){
 
     setIsEditProfilePopupOpen(true)
-  
+    
     
   }
   
@@ -57,21 +58,28 @@ function App() {
   }
 
 
+  function handleUpdateUser(name, about){
+    
+    newApi.patchUserData(name, about)
+    .then(()=>{
+      closeAllPopups()
+      setCurrentUser({...currentUser, name: name, about: about})  
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+
+  }
+
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser} >
         <Header />
         <Main onEditProfile={handleEditProfileClick} onAddPlace ={handleAddPlaceClick} onCard={handleCardClick}/>
 
-        <PopupWithForm name='popup popup-type-edit' title='Редактировать профиль' id="formEdit" isOpen = {isEditProfilePopupOpen} onClose={closeAllPopups}>
-          <form className="popup__form" noValidate name="edit">
-            <input type="text" id="edit-name" name="name" className="popup__input popup__input_type_name" required minLength="2" maxLength="30" value="Jacques Cousteau"/>
-            <span id="error-edit-name" className="error-message"></span>
-            <input type="text" id="job" name="job" className="popup__input popup__input_type_link-url" required minLength="2" maxLength="30" value="Sailor, Researcher"/>
-            <span id="error-job" className="error-message"></span>
-            <button id="edit-button" className="button popup__button button-active"  name='save'>Сохранить</button>
-          </form>
-        </PopupWithForm>
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser }/>
+
         <PopupWithForm  name='popup' title='Новое место' id="newPlace" isOpen = {isAddPlacePopupOpen} onClose={closeAllPopups}>
           <form className="popup__form" noValidate name="new">
             <input type="text" id="popup-name" name="name" className="popup__input popup__input_type_name" required minLength="2" maxLength="30" placeholder="Название" value=""/>

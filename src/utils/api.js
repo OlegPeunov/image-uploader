@@ -33,7 +33,6 @@ class Api{
   }
 
   deleteCard=(card)=>{
-    console.log(card)
     return fetch(`${this.url}/cards/${card.id}`,{
       method: 'DELETE',
       headers: {
@@ -43,6 +42,22 @@ class Api{
     })
     .then(this._getResponseData)  
   }
+
+  patchUserData=(name, job)=>{
+    return fetch(`${this.url}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this.authorization,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        about: job
+      })
+    })
+    .then(this._getResponseData)
+  }
+  
 
 
 
