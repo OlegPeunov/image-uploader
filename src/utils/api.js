@@ -58,7 +58,21 @@ class Api{
     .then(this._getResponseData)
   }
   
+  postNewCard=(name, link)=>{
+    return fetch(`${this.url}/cards`, {
+      method: 'post',
+      headers: {
+        authorization: this.authorization,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        link: link
+      })
+    })
+    .then(this._getResponseData)
 
+  }
 
 
 }

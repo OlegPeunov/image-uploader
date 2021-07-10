@@ -3,9 +3,10 @@ import newApi from '../utils/api';
 import React from 'react';
 import Header from './Header';
 import Main from './Main';
-import PopupWithForm from './PopupWithForm';
 import EditProfilePopup from './EditProfilePopup'
+import EditAvatarPopup from './EditAvatarPopup'
 import ImagePopup from './ImagePopup';
+import AddPlacePopup from './AddPlacePopup';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 
@@ -14,9 +15,10 @@ function App() {
   
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
 
   const [selectedCard, setSelectedCard] = React.useState(false);
-
+  const [cards, setCards] = React.useState([]);
   
   React.useEffect(() => {
     newApi.getUserInfo()
@@ -26,6 +28,19 @@ function App() {
       .catch((err)=>{
         console.log(err)
       })
+
+    newApi.getCards()
+      .then((cardsApi)=>{
+        const date = cardsApi.map((el)=>{
+          return({likes: el.likes, _id: el._id, link: el.link, name: el.name, owner: el.owner})
+        })
+        
+        setCards([...date])
+
+      })
+      .catch((err)=>{
+        console.log(err)
+      })  
 
   }, []); 
   
@@ -48,6 +63,13 @@ function App() {
 
     setIsEditProfilePopupOpen(true)
     
+
+  }
+
+  function handleEditAvatarClick(){
+
+    setIsEditAvatarPopupOpen(true)
+    
     
   }
   
@@ -55,6 +77,7 @@ function App() {
     setIsAddPlacePopupOpen(false)
     setIsEditProfilePopupOpen(false)
     setSelectedCard(false)
+    setIsEditAvatarPopupOpen(false)
   }
 
 
@@ -71,26 +94,51 @@ function App() {
 
   }
 
+  function handleCardDelete(event){
+
+    if (window.confirm("Вы действительно хотите удалить эту карточку?")) { 
+      const card = event.target.closest('.place-card');
+      card.parentElement.removeChild(card);
+      
+      newApi.deleteCard(card)
+        .then(()=>{
+          
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+    } 
+
+  }
+
+  function handleAddPlaceSubmit(name, link) {
+    newApi.postNewCard(name, link)
+      .then((res)=>{  
+        closeAllPopups()
+        setCards([...cards, res]);
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+  }
+
+
 
   return (
     <>
       <CurrentUserContext.Provider value={currentUser} >
         <Header />
-        <Main onEditProfile={handleEditProfileClick} onAddPlace ={handleAddPlaceClick} onCard={handleCardClick}/>
+        
+        <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace ={handleAddPlaceClick} onCard={handleCardClick} handleCardDelete={handleCardDelete} cards={cards}/>
+
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} /> 
 
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser }/>
 
-        <PopupWithForm  name='popup' title='Новое место' id="newPlace" isOpen = {isAddPlacePopupOpen} onClose={closeAllPopups}>
-          <form className="popup__form" noValidate name="new">
-            <input type="text" id="popup-name" name="name" className="popup__input popup__input_type_name" required minLength="2" maxLength="30" placeholder="Название" value=""/>
-            <span id="error-popup-name" className="error-message"></span>
-            <input type="url" id="link" name="link" className="popup__input popup__input_type_link-url" required minLength="2" placeholder="Ссылка на картинку" value=""/>
-            <span id="error-link" className="error-message"></span>
-            <button id="popup-button" className="button popup__button" disabled>+</button>
-          </form>
-        </PopupWithForm>
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}/>
 
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+        
       </CurrentUserContext.Provider>
     </>
   );
