@@ -123,6 +123,22 @@ function App() {
   }
 
 
+  function handleUpdateAvatar (avatarLink){
+
+    
+    newApi.setUserAvatar(avatarLink)
+      .then((res)=>{ 
+        setCurrentUser({...currentUser, avatar: avatarLink})  
+        closeAllPopups()
+        
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+  }
+
+
 
   return (
     <>
@@ -131,7 +147,7 @@ function App() {
         
         <Main onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace ={handleAddPlaceClick} onCard={handleCardClick} handleCardDelete={handleCardDelete} cards={cards}/>
 
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} /> 
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/> 
 
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser }/>
 
