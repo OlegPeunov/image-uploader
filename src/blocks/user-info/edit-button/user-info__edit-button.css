@@ -1,0 +1,11 @@
+.user-info__edit-button{
+  margin-top: 24px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  width: 38px;
+  height: 18px;
+  background-color: chartreuse;
+}
