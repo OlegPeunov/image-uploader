@@ -8,7 +8,7 @@ function Card(props) {
   const classNameLike = `${'place-card__like-icon'} ${isLiked ? 'place-card__like-icon_liked':''}`
 
   function handleClick(event) {
-    if(event.target.classList.value != 'place-card__delete-icon'){
+    if(event.target.classList.value !== 'place-card__delete-icon'){
       props.onCardClick(props.link);
     }
   }

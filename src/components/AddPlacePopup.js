@@ -23,7 +23,6 @@ function AddPlacePopup (props){
 
   function handleLinkChange(e){
     setLink(e.target.value)
-    
     setErrorLink(validateForm(e))
     setIsvalidLink(e.target.validity.valid)
   }
