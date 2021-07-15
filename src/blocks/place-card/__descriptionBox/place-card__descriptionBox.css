@@ -1,8 +1,0 @@
-.place-card__descriptionBox{
-  display: flex;
-  max-height: 100px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-}
