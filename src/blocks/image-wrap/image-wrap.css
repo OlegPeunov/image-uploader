@@ -1,7 +1,8 @@
+@import url(./image__content/image__conent.css);
 @import url(./__popupImage/popupImage.css);
 @import url(./_is-opened/image-wrap_is-opened.css);
 @import url(./__close/popupImage__close.css);
-@import url(./image__content/image__conent.css);
+
 
 .image-wrap{
   position: fixed;
