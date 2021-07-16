@@ -20,7 +20,7 @@
 * Установить зависимости при помощи - **npm i**
 
 
-## [Посмотреть проект>>>](https://olegpeunov.github.io/)
+## [Посмотреть проект>>>](https://olegpeunov.github.io/image-uploader/)
 
 
 
