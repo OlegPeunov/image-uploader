@@ -2,6 +2,10 @@
 
 #### Версия 2.0
 
+![Alt Text](https://media4.giphy.com/media/WY4qB7Y7kn01Ui9Mru/giphy.gif?cid=790b7611e846aeab35234834186433439ef1945fe697964f&rid=giphy.gif&ct=g)
+
+
+
 ## О проекте: 
 
 Сайт для добавления и удаления фотокарточек.
