@@ -20,10 +20,10 @@
 * Установить зависимости при помощи - **npm i**
 
 
-## [Посмотреть проект>>>](https://olegpeunov.github.io/image-uploader/)
+## [Посмотреть проект >>>](https://olegpeunov.github.io/image-uploader/)
 
 
-##### [Старая версия, без фреймворков, на чистом js>>>](https://github.com/OlegPeunov/OlegPeunov.github.io)
+##### [Старая версия, без фреймворков, на чистом js >>>](https://github.com/OlegPeunov/OlegPeunov.github.io)
 
 ***
 Проект создан с помощью следующих технологий: React, JS, Git, VS Code
