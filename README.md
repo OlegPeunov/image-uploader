@@ -26,4 +26,4 @@
 ##### [Старая версия, без фреймворков, на чистом js>>>](https://github.com/OlegPeunov/OlegPeunov.github.io)
 
 ***
-Проект создан с помощью следующих технологий: JS, Git, React, VS Code, WebPack
+Проект создан с помощью следующих технологий: React, JS, Git, VS Code
